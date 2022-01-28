@@ -18,7 +18,13 @@ class User {
         return $this->friendsList;
     }
 
-    
+    public function addFriend(User $friend) {
+
+        $this->friendsList[] = $friend;
+        $friend->friendsList[] = $this;
+    }
+
+
     
 
 
