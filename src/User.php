@@ -55,6 +55,8 @@ class User {
         }
     }
     
+    public function removeFriend(User $friend) {
 
+    }
 
 }

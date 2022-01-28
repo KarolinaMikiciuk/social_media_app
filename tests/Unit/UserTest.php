@@ -105,7 +105,7 @@ class UserTest extends TestCase {
     }
     
      // Scenario 7
-     public function test_you_can_accept_friendship_request_and_change_friendship_status_to_accepted() {
+    public function test_you_can_accept_friendship_request_and_change_friendship_status_to_accepted() {
 
         // Setup
         $john = new User("John");
@@ -127,7 +127,22 @@ class UserTest extends TestCase {
     }
     
      // Scenario 8
+    public function test_can_get_a_list_of_friend_objects() {
+
+
+        
+    }
+
+
+
+
+
+
+
+     // Scenario 9 (8)
     public function test_can_remove_a_friend() {
+
+        $this->markTestIncomplete("Pass scenario 8 first");
 
         // Setup
         $john = new User("John");
@@ -145,6 +160,7 @@ class UserTest extends TestCase {
         $this->assertEmpty($jane->getFriendships());
         $this->assertSame($john->getFriendships()->receiver, $rick);
     }
+     
 
 
 

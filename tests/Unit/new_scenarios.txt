@@ -1,0 +1,17 @@
+// Scenario 8
+
+Given user with username John exists
+Given user with username Jane exists
+Given user with username Rick exists
+Given Jane is a friend of John
+Given Rick is a friend of John
+Given Jane was John's friend before Rick was
+When I get friends of John
+Then an array with Jane and Rick objects
+is returned in the order: Jane, Rick.
+
+hint: the order of friend objects is the same
+as of friendship objects i.e. in chronological
+order
+index 0 friend corresponds to index 0 friendship
+
