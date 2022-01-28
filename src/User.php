@@ -19,9 +19,10 @@ class User {
     }
 
     public function addFriend(User $friend) {
-
-        $this->friendshipsList[] = new Friendship($this, $friend);
-        $friend->friendshipsList[] = new Friendship($this, $friend);
+        
+        $commonFriendship = new Friendship($this, $friend);
+        $this->friendshipsList[] = $commonFriendship;
+        $friend->friendshipsList[] = $commonFriendship;
     }
 
     public function getFriendshipRequests() {
@@ -38,10 +39,20 @@ class User {
 
     public function acceptFriendshipRequest(User $sender) {
 
-        // $requests = $this->getFriendshipRequests();
-        
-        // array_search()
-        
+        $requestedFriendships = $this->getFriendshipRequests();
+
+        foreach ($requestedFriendships as $requestedFriendship) {
+
+            if ($requestedFriendship->sender == $sender) {
+                $friendshipRequestToAccept = $requestedFriendship;
+                break;
+            } 
+        }
+        if (! $friendshipRequestToAccept) {
+            throw new Exception("No friendship request sent from this user.");
+        } else {
+            $friendshipRequestToAccept->status = "accepted";
+        }
     }
     
 
