@@ -116,15 +116,11 @@ class UserTest extends TestCase {
         $jane->acceptFriendshipRequest($john);
 
         // Assert
-        $janesFriendshipRequests = $jane->getFriendshipRequests();
-        $johnsFriendshipRequests = $john->getFriendshipRequests();
-        
-        $this->assertNotEmpty($janesFriendshipRequests);
-        $this->assertNotEmpty($johnsFriendshipRequests);
+        $janesFriendships = $jane->getFriendships();
+        $johnsFriendships = $john->getFriendships();
 
-
-        $friendshipWithJohn = $janesFriendshipRequests[0];
-        $friendshipWithJane = $johnsFriendshipRequests[0];
+        $friendshipWithJohn = $janesFriendships[0];
+        $friendshipWithJane = $johnsFriendships[0];
 
         $this->assertSame("accepted", $friendshipWithJohn->status);
         $this->assertSame("accepted", $friendshipWithJane->status);
