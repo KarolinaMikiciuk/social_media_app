@@ -16,9 +16,10 @@ class UserTest extends TestCase {
         $johnUsername = $john->username;
 
         // Assert
-        assertTrue($johnUsername , 'John');
+        $this->assertEquals($johnUsername , 'John');
     }
-
+    
+    
 
 
 }
