@@ -35,6 +35,9 @@ class UserTest extends TestCase {
 
     public function test_get_the_friends_of_a_user_with_friends() {
 
+        $this->markTestIncomplete('Friends first need to accepr friendship request. We need to rework this feature.');
+
+
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
