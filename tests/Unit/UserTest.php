@@ -127,7 +127,24 @@ class UserTest extends TestCase {
     }
     
      // Scenario 8
-     
+    public function test_can_remove_a_friend() {
+
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+        $rick = new User("Rick");
+        $john->addFriend($jane);
+        $john->addFriend($rick);
+        $jane->acceptFriendshipRequest($john);
+        $rick->acceptFriendshipRequest($john);
+
+        // Act
+        $jane->removeFriend($john);
+
+        // Assert
+        $this->assertEmpty($jane->getFriendships());
+        $this->assertSame($john->getFriendships()->receiver, $rick);
+    }
 
 
 
