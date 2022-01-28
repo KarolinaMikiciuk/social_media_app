@@ -88,5 +88,21 @@ class UserTest extends TestCase {
         $this->assertEmpty($johnsFriendshipRequests);
     }
 
+    // Scenario 6
+    public function test_get_friendship_request_every_time_someone_adds_you_as_a_friend() {
+
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+        $john->addFriend($jane);
+        
+        // Act
+        $janesFriendshipRequests = $jane->getFriendshipRequests();
+        $friendshipWithJohn = $janesFriendshipRequests[0];
+
+        // Assert
+        $this->assertSame($john, $friendshipWithJohn->sender);
+
+    }
 
 }
