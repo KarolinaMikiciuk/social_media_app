@@ -1,0 +1,22 @@
+{
+    "name": "karolina/app",
+    "description": "A simple social media app backend written in PHP.",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "10.0.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Karolina\\App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Karolina Mikiciuk",
+            "email": "karolina-o-mikiciuk@wp.pl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
