@@ -19,7 +19,17 @@ class UserTest extends TestCase {
         $this->assertEquals($johnUsername , 'John');
     }
     
-    
+    public function test_get_the_friends_of_a_user_with_no_friends() {
+
+        // Setup
+        $john = new User("John");
+
+        // Act
+        $johnsFriends = $john->getFriends();
+
+        // Assert
+        $this->assertEmpty($johnsFriends);
+    }
 
 
 }
