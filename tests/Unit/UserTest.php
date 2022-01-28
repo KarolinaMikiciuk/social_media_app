@@ -102,7 +102,11 @@ class UserTest extends TestCase {
 
         // Assert
         $this->assertSame($john, $friendshipWithJohn->sender);
-
     }
+    
+    
+
+
+
 
 }
