@@ -33,7 +33,22 @@ class UserTest extends TestCase {
         $this->assertEmpty($johnsFriends);
     }
 
+    public function test_get_the_friends_of_a_user_with_friends() {
 
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+        $richard = new User("Richard");
+        $john->addFriend($jane);
+        $john->addFriend($richard);
+
+        // Act
+        $johnsFriends = $john->getFriends();
+        
+        // Assert
+        $this->assertCount(2, $johnsFriends);
+        $this->assertSame([$jane, $richard], $johnsFriends);
+    }
     
 
 }
