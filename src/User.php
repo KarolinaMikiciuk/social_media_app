@@ -36,7 +36,13 @@ class User {
         return $friendshipRequests;
     }
 
+    public function acceptFriendshipRequest(User $sender) {
 
+        // $requests = $this->getFriendshipRequests();
+        
+        // array_search()
+        
+    }
     
 
 

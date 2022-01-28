@@ -98,14 +98,39 @@ class UserTest extends TestCase {
         
         // Act
         $janesFriendshipRequests = $jane->getFriendshipRequests();
-        $friendshipWithJohn = $janesFriendshipRequests[0];
 
         // Assert
+        $friendshipWithJohn = $janesFriendshipRequests[0];
         $this->assertSame($john, $friendshipWithJohn->sender);
     }
     
-    
+     // Scenario 7
+     public function test_you_can_accept_friendship_request_and_change_friendship_status_to_accepted() {
 
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+        $john->addFriend($jane);
+        
+        // Act
+        $jane->acceptFriendshipRequest($john);
+
+        // Assert
+        $janesFriendshipRequests = $jane->getFriendshipRequests();
+        $johnsFriendshipRequests = $john->getFriendshipRequests();
+        
+        $this->assertNotEmpty($janesFriendshipRequests);
+        $this->assertNotEmpty($johnsFriendshipRequests);
+
+
+        $friendshipWithJohn = $janesFriendshipRequests[0];
+        $friendshipWithJane = $johnsFriendshipRequests[0];
+
+        $this->assertSame("accepted", $friendshipWithJohn->status);
+        $this->assertSame("accepted", $friendshipWithJane->status);
+    }
+    
+     // Scenario 8
 
 
 
