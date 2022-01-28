@@ -13,7 +13,7 @@ class User {
         $this->username = $username;
     }
     
-    public function getFriends() {
+    public function getFriendships() {
 
         return $this->friendsList;
     }
