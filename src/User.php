@@ -6,7 +6,7 @@ namespace Karolina\App;
 class User {
     
     public string $username;
-    public array $friendsList = [];
+    public array $friendshipsList = [];
 
     public function __construct($username) {
 
@@ -15,13 +15,13 @@ class User {
     
     public function getFriendships() {
 
-        return $this->friendsList;
+        return $this->friendshipsList;
     }
 
     public function addFriend(User $friend) {
 
-        $this->friendsList[] = $friend;
-        $friend->friendsList[] = $this;
+        $this->friendshipsList[] = $friend;
+        $friend->friendshipsList[] = $this;
     }
 
 
