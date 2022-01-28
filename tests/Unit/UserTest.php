@@ -7,6 +7,7 @@ use Karolina\App\User;
 
 class UserTest extends TestCase {
 
+
     public function test_get_the_username_of_a_user() {
 
         // Setup
@@ -18,6 +19,7 @@ class UserTest extends TestCase {
         // Assert
         $this->assertEquals($johnUsername , 'John');
     }
+
     
     public function test_get_the_friends_of_a_user_with_no_friends() {
 
@@ -31,5 +33,7 @@ class UserTest extends TestCase {
         $this->assertEmpty($johnsFriends);
     }
 
+
+    
 
 }
