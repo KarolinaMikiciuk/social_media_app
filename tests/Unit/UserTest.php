@@ -9,7 +9,7 @@ use Karolina\App\Friendship;
 
 class UserTest extends TestCase {
 
-
+    // Scenario 1
     public function test_get_the_username_of_a_user() {
 
         // Setup
@@ -22,7 +22,7 @@ class UserTest extends TestCase {
         $this->assertEquals($johnUsername , 'John');
     }
 
-    
+    // Scenario 2
     public function test_get_the_friends_of_a_user_with_no_friends() {
 
         // Setup
@@ -35,6 +35,7 @@ class UserTest extends TestCase {
         $this->assertEmpty($johnsFriends);
     }
 
+    // Scenario 3
     public function test_get_the_friends_of_a_user_with_friends() {
 
         $this->markTestIncomplete('Friends first need to accept friendship request. 
@@ -56,6 +57,7 @@ class UserTest extends TestCase {
         $this->assertSame([$jane, $richard], $johnsFriendships);
     }
     
+    // Scenario 4
     public function test_friendship_is_pending_status_by_default_when_a_friend_request_is_sent() {
 
         // Setup 
@@ -72,5 +74,9 @@ class UserTest extends TestCase {
         $this->assertSame($jane, $janeFriendship->receiver); // checking receiver is jane object 
         $this->assertSame("pending", $janeFriendship->status); // checking status of friendship
     }
+    
+    // Scenario 5
+
+
 
 }

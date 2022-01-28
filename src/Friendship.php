@@ -14,7 +14,7 @@ class Friendship {
         $this->receiver = $receiver;
         $this->status = "pending";
     }
-
+    
 
 
 
