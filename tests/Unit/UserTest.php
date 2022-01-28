@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Karolina\App\User;
+use Karolina\App\Friendship;
+
 
 class UserTest extends TestCase {
 
@@ -60,15 +62,15 @@ class UserTest extends TestCase {
         $john = new User("John");
         $jane = new User("Jane");
         $john->addFriend($jane);
-        $janeFriendship = new Friendship($jane, $john);
 
         // Act
         $johnsFriendship = $john->getFriendships();
+        $janeFriendship = $johnsFriendship[0]; // jane friendship object 
         
         // Assert
         $this->assertCount(1, $johnsFriendship);
-        $this->assertSame($johnsFriendship, [$janeFriendship]);
-        $this->assertEqual($janeFriendship->status , "pending");
+        $this->assertSame($jane, $janeFriendship->receiver); // checking receiver is jane object 
+        $this->assertSame("pending", $janeFriendship->status); // checking status of friendship
     }
 
 }

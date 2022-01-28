@@ -20,8 +20,8 @@ class User {
 
     public function addFriend(User $friend) {
 
-        $this->friendshipsList[] = $friend;
-        $friend->friendshipsList[] = $this;
+        $this->friendshipsList[] = new Friendship($this, $friend);
+        $friend->friendshipsList[] = new Friendship($this, $friend);
     }
 
 
