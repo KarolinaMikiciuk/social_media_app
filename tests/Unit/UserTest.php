@@ -76,7 +76,17 @@ class UserTest extends TestCase {
     }
     
     // Scenario 5
+    public function test_get_the_friendship_requests_of_a_user_with_no_friendship_requests() {
 
+        // Setup
+        $john = new User("John");
+        
+        // Act
+        $johnsFriendshipRequests = $john->getFriendshipRequests();
+
+        // Assert
+        $this->assertEmpty($johnsFriendshipRequests);
+    }
 
 
 }

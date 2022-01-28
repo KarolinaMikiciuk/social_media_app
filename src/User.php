@@ -24,6 +24,18 @@ class User {
         $friend->friendshipsList[] = new Friendship($this, $friend);
     }
 
+    public function getFriendshipRequests() {
+
+        $friendshipRequests = [];
+        foreach ($this->friendshipsList as $friendship) {
+            if ($friendship->status == "pending") {
+
+                $friendshipRequests[] = $friendship;
+            }
+        }
+        return $friendshipRequests;
+    }
+
 
     
 
