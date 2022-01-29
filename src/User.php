@@ -8,6 +8,7 @@ class User {
     public string $username;
     public array $friendshipsList = [];
     public array $blockedUsersList = [];
+    public array $posts = [];
 
     public function __construct($username) {
 
@@ -95,4 +96,13 @@ class User {
             echo "You have already blocked this user";
         }
     }
+
+    public function createPost(string $text) {
+
+        $this->posts[] = $text;
+    }
+
+
+
+
 }

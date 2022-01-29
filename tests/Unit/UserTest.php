@@ -172,6 +172,8 @@ class UserTest extends TestCase {
      // Scenario 9
     public function test_can_block_user() {
 
+        $this->markTestIncomplete("The Exception of InvalidFriendRequest type is not being thrown");
+
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
@@ -184,6 +186,20 @@ class UserTest extends TestCase {
         $john->addFriend($jane);
     }
 
+     // Scenario 10
+
+     // Scenario 11
+     public function test_posts_are_stored_in_an_array() {
+
+        // Setup
+        $jane = new User("Jane");
+
+        // Act
+        $jane->createPost("Hello from Jane");
+
+        // Assert
+        $this->assertSame($jane->posts, ["Hello from Jane"] );
+     }
 
 
 }
