@@ -129,8 +129,22 @@ class UserTest extends TestCase {
      // Scenario 8
     public function test_can_get_a_list_of_friend_objects() {
 
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+        $rick = new User("Rick");
 
-        
+        $john->addFriend($jane);
+        $jane->acceptFriendshipRequest($john);
+        $john->addFriend($rick);
+        $rick->acceptFriendshipRequest($john);
+
+        // Act
+        $johnsFriendsList = $john->getFriends();
+
+        // Assert
+        $this->assertSame($jane,$johnsFriendsList[0]);
+        $this->assertSame($rick,$johnsFriendsList[1]);
     }
 
 
