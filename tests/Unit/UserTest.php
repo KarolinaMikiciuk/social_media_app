@@ -216,11 +216,24 @@ class UserTest extends TestCase {
     }
     
      // Scenario 13
-    public function test_can_view_only_the_posts_made_by_the_users_friends() {
+    public function test_can_view_only_the_posts_made_by_the_friends_of_the_user() {
 
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+        $rick = new User("Rick");
+        $john->addFriend($jane);
+        $jane->acceptFriendshipRequest($john);
+        $jane->createPost("Hello from Jane");
+        $rick->createPost("Hello from Rick");
 
+        // Act
+        $postsRequestedFromJane = $john->requestToViewPosts($jane);
+        $postsRequestedFromRick = $john->requestToViewPosts($rick);
 
-        
+        // Assert
+        $this->assertSame($postsRequestedFromJane, ["Hello from Jane"]);
+        $this->assertSame($postsRequestedFromRick, []);
     }
 
 }
