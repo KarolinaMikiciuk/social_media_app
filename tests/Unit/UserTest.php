@@ -151,8 +151,6 @@ class UserTest extends TestCase {
      // Scenario 9 (8)
     public function test_can_remove_a_friend() {
 
-        $this->markTestIncomplete("Pass scenario 8 first");
-
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
@@ -166,8 +164,8 @@ class UserTest extends TestCase {
         $jane->removeFriend($john);
 
         // Assert
-        $this->assertEmpty($jane->getFriendships());
-        $this->assertSame($john->getFriendships()->receiver, $rick);
+        $this->assertEmpty($jane->getFriendships()); // jane has no friendships
+        $this->assertSame($john->getFriendships()[0]->receiver, $rick); // johns only friend is rick
     }
      
 
