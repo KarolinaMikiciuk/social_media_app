@@ -164,8 +164,8 @@ class UserTest extends TestCase {
         $jane->removeFriend($john);
 
         // Assert
-        $this->assertEmpty($jane->getFriendships()); // jane has no friendships
-        $this->assertSame($john->getFriendships()[0]->receiver, $rick); // johns only friend is rick
+        $this->assertEmpty($jane->getFriends()); // jane has no friends
+        $this->assertSame($john->getFriends()[0], $rick); // johns only friend is rick
     }
      
 
