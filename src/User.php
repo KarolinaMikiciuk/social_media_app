@@ -7,6 +7,7 @@ class User {
     
     public string $username;
     public array $friendshipsList = [];
+    public array $blockedUsersList = [];
 
     public function __construct($username) {
 
@@ -19,7 +20,10 @@ class User {
     }
 
     public function addFriend(User $friend) {
-        
+         
+        if ( in_array($friend, $this->blockedUsersList, true) ) {
+            throw InvalidFriendRequest::cannotSendFriendRequest();
+        }
         $commonFriendship = new Friendship($this, $friend);
         $this->friendshipsList[] = $commonFriendship;
         $friend->friendshipsList[] = $commonFriendship;
@@ -84,8 +88,11 @@ class User {
 
 
     public function blockUser(User $user) {
-
-
-
+        
+        if ( ! in_array($user, $this->blockedUsersList, true) ) {
+            $this->blockedUsersList[] = $user;
+        } else {
+            echo "You have already blocked this user";
+        }
     }
 }
