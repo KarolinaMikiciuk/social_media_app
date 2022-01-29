@@ -1,6 +1,6 @@
 {
     "name": "karolina/app",
-    "description": "A simple social media app backend written in PHP.",
+    "description": "A simple social media app backend written in PHP. Implemented using TDD and OOP.",
     "type": "project",
     "require-dev": {
         "phpunit/phpunit": "10.0.x-dev"

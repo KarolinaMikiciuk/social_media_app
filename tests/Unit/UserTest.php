@@ -213,8 +213,14 @@ class UserTest extends TestCase {
 
         // Assert
         $this->assertSame($viewedPosts, ["Hello from Jane"] );
-     }
+    }
     
-    
+     // Scenario 13
+    public function test_can_view_only_the_posts_made_by_the_users_friends() {
+
+
+
+        
+    }
 
 }
