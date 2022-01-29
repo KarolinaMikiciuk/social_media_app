@@ -147,12 +147,6 @@ class UserTest extends TestCase {
         $this->assertSame($rick,$johnsFriendsList[1]);
     }
 
-
-
-
-
-
-
      // Scenario 9 (8)
     public function test_can_remove_a_friend() {
 

@@ -54,6 +54,22 @@ class User {
             $friendshipRequestToAccept->status = "accepted";
         }
     }
+
+    public function getFriends() {
+
+        $friendshipsList = $this->getFriendships();
+
+        $friends = [];
+        foreach($friendshipsList as $friendship) {
+
+            if ($this != $friendship->sender) {
+                $friends[] = $friendship->sender;
+            } else {
+                $friends[] = $friendship->receiver;
+            }
+        }
+        return $friends;
+    }
     
     public function removeFriend(User $friend) {
 
