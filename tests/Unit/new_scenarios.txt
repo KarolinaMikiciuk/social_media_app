@@ -15,3 +15,14 @@ as of friendship objects i.e. in chronological
 order
 index 0 friend corresponds to index 0 friendship
 hint: perhaps test this scenario in reverse order,too
+
+
+// Scenario 10
+Given user with username John exists
+Given user with username Jane exists
+Given Jane has blocked John
+When Jane blocks John again
+Then text "You have already blocked this user" 
+is displayed
+
+
