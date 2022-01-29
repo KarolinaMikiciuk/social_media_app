@@ -102,7 +102,10 @@ class User {
         $this->posts[] = $text;
     }
 
+    public function requestToViewPosts(User $user) {
 
+        return $user->posts;
+    }
 
 
 }
