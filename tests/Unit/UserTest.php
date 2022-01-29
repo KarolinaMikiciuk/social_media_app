@@ -200,6 +200,21 @@ class UserTest extends TestCase {
         // Assert
         $this->assertSame($jane->posts, ["Hello from Jane"] );
      }
+    
+    // Scenario 12
+    public function test_can_return_own_posts() {
 
+        // Setup
+        $jane = new User("Jane");
+        $jane->createPost("Hello from Jane");
+
+        // Act
+        $viewedPosts = $jane->requestToViewPosts($jane);
+
+        // Assert
+        $this->assertSame($viewedPosts, ["Hello from Jane"] );
+     }
+    
+    
 
 }

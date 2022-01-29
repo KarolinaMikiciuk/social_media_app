@@ -29,7 +29,7 @@ is displayed
 // Scenario 11
 Given there is a user with username Jane
 When Jane creates a post
-Then the post is stores in an array
+Then the post is stored in an array
 
 
 // Scenario 12
