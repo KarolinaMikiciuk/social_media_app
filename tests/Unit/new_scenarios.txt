@@ -25,4 +25,7 @@ When Jane blocks John again
 Then text "You have already blocked this user" 
 is displayed
 
-
+// Scenario 11
+Given there is a user with username Jane
+When Jane creates a post
+Then the post is stores in an array
