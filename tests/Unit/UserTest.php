@@ -39,23 +39,21 @@ class UserTest extends TestCase {
     // Scenario 3
     public function test_get_the_friends_of_a_user_with_friends() {
 
-        $this->markTestIncomplete('Friends first need to accept friendship request. 
-                                    We need to rework this feature.');
-
-
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
         $richard = new User("Richard");
         $john->addFriend($jane);
         $john->addFriend($richard);
+        $richard->acceptFriendshipRequest($john);
+        $jane->acceptFriendshipRequest($john);
 
         // Act
-        $johnsFriendships = $john->getFriendships();
+        $johnsFriends = $john->getFriends();
         
         // Assert
-        $this->assertCount(2, $johnsFriendships);
-        $this->assertSame([$jane, $richard], $johnsFriendships);
+        $this->assertCount(2, $johnsFriends);
+        $this->assertSame([$jane, $richard], $johnsFriends);
     }
     
     // Scenario 4

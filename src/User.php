@@ -110,11 +110,10 @@ class User {
 
         } elseif (! in_array($user, $friends, true) ) {
             return [];
-            
+
         } else {
             return $user->posts;
         }
     }
-
 
 }
