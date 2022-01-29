@@ -145,6 +145,7 @@ class UserTest extends TestCase {
         // Assert
         $this->assertSame($jane,$johnsFriendsList[0]);
         $this->assertSame($rick,$johnsFriendsList[1]);
+        $this->assertCount(2, $johnsFriendsList);
     }
 
      // Scenario 9 (8)
