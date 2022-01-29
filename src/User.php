@@ -82,4 +82,10 @@ class User {
         unset($friend->friendshipsList[$index]);
     }
 
+
+    public function blockUser(User $user) {
+
+
+
+    }
 }

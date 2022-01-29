@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Karolina\App\User;
 use Karolina\App\Friendship;
+use Karolina\App\InvalidFriendRequest;
 
 
 class UserTest extends TestCase {
@@ -168,6 +169,20 @@ class UserTest extends TestCase {
         $this->assertSame($john->getFriends()[0], $rick); // johns only friend is rick
     }
      
+     // Scenario 9
+    public function test_can_block_user() {
+
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+
+        // Act
+        $jane->blockUser($john);
+
+        // Assert
+        $this->expectException(InvalidFriendRequest::class);
+        $john->addFriend($jane);
+    }
 
 
 
