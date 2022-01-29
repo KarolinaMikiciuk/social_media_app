@@ -104,7 +104,16 @@ class User {
 
     public function requestToViewPosts(User $user) {
 
-        return $user->posts;
+        $friends = $this->getFriends();
+        if ( $user==$this ) {
+            return $this->posts;
+
+        } elseif (! in_array($user, $friends, true) ) {
+            return [];
+            
+        } else {
+            return $user->posts;
+        }
     }
 
 
