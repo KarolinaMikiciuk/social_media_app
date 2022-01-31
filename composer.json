@@ -18,5 +18,6 @@
             "email": "karolina-o-mikiciuk@wp.pl"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
