@@ -81,7 +81,6 @@ class User
 
     public function removeFriend(User $friend)
     {
-
         $friendsList = $this->getFriends();
         $index = array_search($friend,$friendsList);
         unset($this->friendshipsList[$index]);
