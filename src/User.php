@@ -20,10 +20,6 @@ class User
         return $this->friendshipsList;
     }
 
-    // $john->addFriend($jane);
-    //  | $this   -> $john    |
-    //  | $friend ->  $jane   |
-
     /**
      * @throws InvalidFriendRequest
      */

@@ -1,21 +1,3 @@
-// Scenario 8
-
-Given user with username John exists
-Given user with username Jane exists
-Given user with username Rick exists
-Given Jane is a friend of John
-Given Rick is a friend of John
-Given Jane was John's friend before Rick was
-When I get friends of John
-Then an array with Jane and Rick objects
-is returned in the order: Jane, Rick.
-
-hint: the order of friend objects is the same
-as of friendship objects i.e. in chronological
-order
-index 0 friend corresponds to index 0 friendship
-hint: perhaps test this scenario in reverse order,too
-
 
 // Scenario 10
 Given user with username John exists
@@ -37,4 +19,13 @@ Given user with username Jane exists
 Given Jane has created a post saying "Hello from Jane"
 When Jane requests to see her own posts
 Then "Hello from Jane" is returned 
+
+
+// Scenario 13
+Given user with username Jane exists
+Given user with username John exists
+Given that John sends Jane a friendship request
+Given that Jane accepts the friendship request
+When I check whether their friendship is accepted
+Then true is returned 
 
