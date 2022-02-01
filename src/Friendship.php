@@ -22,6 +22,6 @@ class Friendship {
 
     public function isAccepted(): bool
     {
-        return $this->status === 'accepted'; // TODO: Add test method for method :)
+        return $this->status === 'accepted'; 
     }
 }
