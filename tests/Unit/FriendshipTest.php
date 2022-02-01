@@ -24,6 +24,7 @@ class FriendshipTest extends TestCase
     }
 
     /** @test */
+    // Scenario 11
     function returns_true_when_getting_the_status_of_an_accepted_friendship()
     {
         // Setup

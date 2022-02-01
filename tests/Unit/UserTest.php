@@ -11,7 +11,8 @@ use Karolina\App\InvalidFriendRequest;
 class UserTest extends TestCase {
 
     // Scenario 1
-    public function test_get_the_username_of_a_user() {
+    public function test_get_the_username_of_a_user() 
+    {
 
         // Setup
         $john = new User("John");
@@ -214,7 +215,8 @@ class UserTest extends TestCase {
      }
     
     // Scenario 10.2
-    public function test_can_return_own_posts() {
+    public function test_can_return_own_posts() 
+    {
 
         // Setup
         $jane = new User("Jane");
@@ -228,7 +230,8 @@ class UserTest extends TestCase {
     }
     
      // Scenario 10.3
-    public function test_can_view_only_the_posts_made_by_the_friends_of_the_user() {
+    public function test_can_view_only_the_posts_made_by_the_friends_of_the_user() 
+    {
 
         // Setup
         $john = new User("John");
@@ -246,6 +249,13 @@ class UserTest extends TestCase {
         // Assert
         $this->assertSame($postsRequestedFromJane, ["Hello from Jane"]);
         $this->assertSame($postsRequestedFromRick, []);
+    }
+
+     // Scenario 12
+    public function test_cannot_block_the_same_user_twice() 
+    {
+
+
     }
 
 }
