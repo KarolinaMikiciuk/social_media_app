@@ -20,12 +20,12 @@ class UserTest extends TestCase {
         $johnUsername = $john->username;
 
         // Assert
-        $this->assertEquals($johnUsername , 'John');
+        $this->assertSame($johnUsername , 'John');
     }
 
     // Scenario 2
-    public function test_get_the_friends_of_a_user_with_no_friends() {
-
+    public function test_get_the_friends_of_a_user_with_no_friends()
+    {
         // Setup
         $john = new User("John");
 
@@ -37,46 +37,71 @@ class UserTest extends TestCase {
     }
 
     // Scenario 3
-    public function test_get_the_friends_of_a_user_with_friends() {
-
+    public function test_get_the_friends_of_a_user_with_friends()
+    {
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
         $richard = new User("Richard");
+
         $john->addFriend($jane);
         $john->addFriend($richard);
+
         $richard->acceptFriendshipRequest($john);
         $jane->acceptFriendshipRequest($john);
 
         // Act
-        $johnsFriends = $john->getFriends();
-        
+        $johnsFriendships = $john->getFriends();
+
         // Assert
-        $this->assertCount(2, $johnsFriends);
-        $this->assertSame([$jane, $richard], $johnsFriends);
+        $this->assertCount(2, $johnsFriendships);
+        $this->assertSame([$jane, $richard], $johnsFriendships);
+    }
+
+    public function test_can_get_a_list_of_friends()
+    {
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+        $rick = new User("Rick");
+
+        $john->addFriend($jane);
+        $jane->acceptFriendshipRequest($john);
+
+        $john->addFriend($rick);
+        $rick->acceptFriendshipRequest($john);
+
+        // Act
+        $johnsFriendsList = $john->getFriends();
+
+        // Assert
+        $this->assertSame($jane, $johnsFriendsList[0]);
+        $this->assertSame($rick, $johnsFriendsList[1]);
+        $this->assertCount(2, $johnsFriendsList);
     }
     
     // Scenario 4
-    public function test_friendship_is_pending_status_by_default_when_a_friend_request_is_sent() {
-
+    public function test_friendship_is_pending_status_by_default_when_a_friend_request_is_sent()
+    {
         // Setup 
         $john = new User("John");
         $jane = new User("Jane");
+
         $john->addFriend($jane);
 
         // Act
-        $johnsFriendship = $john->getFriendships();
-        $janeFriendship = $johnsFriendship[0]; // jane friendship object 
+        $johnsFriendships = $john->getFriendships();
+        $janeFriendship = $johnsFriendships[0]; // jane friendship object
         
         // Assert
-        $this->assertCount(1, $johnsFriendship);
+        $this->assertCount(1, $johnsFriendships);
         $this->assertSame($jane, $janeFriendship->receiver); // checking receiver is jane object 
         $this->assertSame("pending", $janeFriendship->status); // checking status of friendship
     }
     
     // Scenario 5
-    public function test_get_the_friendship_requests_of_a_user_with_no_friendship_requests() {
-
+    public function test_get_the_friendship_requests_of_a_user_with_no_friendship_requests()
+    {
         // Setup
         $john = new User("John");
         
@@ -88,29 +113,37 @@ class UserTest extends TestCase {
     }
 
     // Scenario 6
-    public function test_get_friendship_request_every_time_someone_adds_you_as_a_friend() {
-
+    public function test_get_friendship_request_every_time_someone_adds_you_as_a_friend()
+    {
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
-        $john->addFriend($jane);
-        
+
+        // Sanity check (initial state before acting)
+        $this->assertEmpty($jane->getFriendshipRequests());
+
         // Act
+        $john->addFriend($jane);
+
+        // Assert (the status of the system has changed)
         $janesFriendshipRequests = $jane->getFriendshipRequests();
 
-        // Assert
+        $this->assertCount(1, $janesFriendshipRequests, 'Jane has no friendship requests');
+
         $friendshipWithJohn = $janesFriendshipRequests[0];
         $this->assertSame($john, $friendshipWithJohn->sender);
+        $this->assertSame($jane, $friendshipWithJohn->receiver);
+        $this->assertSame('pending', $friendshipWithJohn->status);
     }
     
      // Scenario 7
-    public function test_you_can_accept_friendship_request_and_change_friendship_status_to_accepted() {
-
+    public function test_you_can_accept_friendship_request_and_change_friendship_status_to_accepted()
+    {
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
         $john->addFriend($jane);
-        
+
         // Act
         $jane->acceptFriendshipRequest($john);
 
@@ -118,42 +151,23 @@ class UserTest extends TestCase {
         $janesFriendships = $jane->getFriendships();
         $johnsFriendships = $john->getFriendships();
 
-        $friendshipWithJohn = $janesFriendships[0];
-        $friendshipWithJane = $johnsFriendships[0];
+        $this->assertCount(1, $johnsFriendships, 'John has no friendship requests');
+        $this->assertCount(1, $janesFriendships, 'Jane has no friendship requests');
 
-        $this->assertSame("accepted", $friendshipWithJohn->status);
-        $this->assertSame("accepted", $friendshipWithJane->status);
+        $this->assertSame($janesFriendships[0], $johnsFriendships[0]);
+
+        $this->assertSame("accepted", $janesFriendships[0]->status);
+        $this->assertSame("accepted", $johnsFriendships[0]->status);
     }
-    
+
      // Scenario 8
-    public function test_can_get_a_list_of_friend_objects() {
-
+    public function test_can_remove_a_friend()
+    {
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
         $rick = new User("Rick");
 
-        $john->addFriend($jane);
-        $jane->acceptFriendshipRequest($john);
-        $john->addFriend($rick);
-        $rick->acceptFriendshipRequest($john);
-
-        // Act
-        $johnsFriendsList = $john->getFriends();
-
-        // Assert
-        $this->assertSame($jane,$johnsFriendsList[0]);
-        $this->assertSame($rick,$johnsFriendsList[1]);
-        $this->assertCount(2, $johnsFriendsList);
-    }
-
-     // Scenario 9 (8)
-    public function test_can_remove_a_friend() {
-
-        // Setup
-        $john = new User("John");
-        $jane = new User("Jane");
-        $rick = new User("Rick");
         $john->addFriend($jane);
         $john->addFriend($rick);
         $jane->acceptFriendshipRequest($john);
@@ -164,14 +178,13 @@ class UserTest extends TestCase {
 
         // Assert
         $this->assertEmpty($jane->getFriends()); // jane has no friends
+        $this->assertCount(1, $john->getFriends());
         $this->assertSame($john->getFriends()[0], $rick); // johns only friend is rick
     }
      
      // Scenario 9
-    public function test_can_block_user() {
-
-        $this->markTestIncomplete("The Exception of InvalidFriendRequest type is not being thrown");
-
+    public function test_can_block_user()
+    {
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
@@ -186,8 +199,9 @@ class UserTest extends TestCase {
 
      // Scenario 10
 
-     // Scenario 11
-     public function test_posts_are_stored_in_an_array() {
+     // Scenario 10.1
+     public function test_posts_are_stored_in_an_array()
+     {
 
         // Setup
         $jane = new User("Jane");

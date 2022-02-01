@@ -2,8 +2,8 @@
 
 namespace Karolina\App;
 
-
-class User {
+class User
+{
     
     public string $username;
     public array $friendshipsList = [];
@@ -20,18 +20,26 @@ class User {
         return $this->friendshipsList;
     }
 
-    public function addFriend(User $friend) {
-         
-        if ( in_array($friend, $this->blockedUsersList, true) ) {
-            throw InvalidFriendRequest::cannotSendFriendRequest();
+    // $john->addFriend($jane);
+    //  | $this   -> $john    |
+    //  | $friend ->  $jane   |
+
+    /**
+     * @throws InvalidFriendRequest
+     */
+    public function addFriend(User $friend)
+    {
+        if (in_array($this, $friend->blockedUsersList, true)) {
+            throw new InvalidFriendRequest('Cannot send a friend request to this user.');
         }
+
         $commonFriendship = new Friendship($this, $friend);
         $this->friendshipsList[] = $commonFriendship;
         $friend->friendshipsList[] = $commonFriendship;
     }
 
-    public function getFriendshipRequests() {
-
+    public function getFriendshipRequests()
+    {
         $friendshipRequests = [];
         foreach ($this->friendshipsList as $friendship) {
             if ($friendship->status == "pending") {
@@ -60,23 +68,23 @@ class User {
         }
     }
 
-    public function getFriends() {
+    public function getFriends(): array
+    {
+        $acceptedFriendships = array_filter(
+            $this->getFriendships(),
+            fn(Friendship $friendship) => $friendship->isAccepted()
+        );
 
-        $friendshipsList = $this->getFriendships();
+        $friends = array_map(
+            fn(Friendship $friendship) => $friendship->getFriendOf($this),
+            $acceptedFriendships
+        );
 
-        $friends = [];
-        foreach($friendshipsList as $friendship) {
-
-            if ($this != $friendship->sender) {
-                $friends[] = $friendship->sender;
-            } else {
-                $friends[] = $friendship->receiver;
-            }
-        }
-        return $friends;
+        return array_values($friends);
     }
-    
-    public function removeFriend(User $friend) {
+
+    public function removeFriend(User $friend)
+    {
 
         $friendsList = $this->getFriends();
         $index = array_search($friend,$friendsList);
@@ -87,10 +95,9 @@ class User {
         unset($friend->friendshipsList[$index]);
     }
 
-
-    public function blockUser(User $user) {
-        
-        if ( ! in_array($user, $this->blockedUsersList, true) ) {
+    public function blockUser(User $user)
+    {
+        if (! in_array($user, $this->blockedUsersList, true) ) {
             $this->blockedUsersList[] = $user;
         } else {
             echo "You have already blocked this user";
