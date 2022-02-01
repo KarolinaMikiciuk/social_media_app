@@ -260,13 +260,13 @@ class UserTest extends TestCase {
         $jane->blockUser($john);
 
         // Sanity check 1: john is in the blocked users list
-        $this->assertSame($jane->blockedUsers(), [$john]);
+        $this->assertSame($jane->blockedUsersList, [$john]);
 
         // Act
         $jane->blockUser($john);
         
         // Sanity check 2: john is in the blocked users list only once
-        $this->assertSame($jane->blockedUsers(), [$john]);
+        $this->assertSame($jane->blockedUsersList, [$john]);
         
         // Assert
         $this->expectOutputString("You have already blocked this user");
