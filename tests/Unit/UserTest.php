@@ -254,8 +254,22 @@ class UserTest extends TestCase {
      // Scenario 12
     public function test_cannot_block_the_same_user_twice() 
     {
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+        $jane->blockUser($john);
 
+        // Sanity check 1: john is in the blocked users list
+        $this->assertSame($jane->blockedUsers(), [$john]);
 
+        // Act
+        $jane->blockUser($john);
+        
+        // Sanity check 2: john is in the blocked users list only once
+        $this->assertSame($jane->blockedUsers(), [$john]);
+        
+        // Assert
+        $this->expectOutputString("You have already blocked this user");
     }
 
 }
