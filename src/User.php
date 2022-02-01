@@ -10,13 +10,13 @@ class User
     public array $blockedUsersList = [];
     public array $posts = [];
 
-    public function __construct($username) {
-
+    public function __construct($username) 
+    {
         $this->username = $username;
     }
     
-    public function getFriendships() {
-
+    public function getFriendships() 
+    {
         return $this->friendshipsList;
     }
 
@@ -46,7 +46,8 @@ class User
         return $friendshipRequests;
     }
 
-    public function acceptFriendshipRequest(User $sender) {
+    public function acceptFriendshipRequest(User $sender) 
+    {
 
         $requestedFriendships = $this->getFriendshipRequests();
 
@@ -99,13 +100,13 @@ class User
         }
     }
 
-    public function createPost(string $text) {
-
+    public function createPost(string $text) 
+    {
         $this->posts[] = $text;
     }
 
-    public function requestToViewPosts(User $user) {
-
+    public function requestToViewPosts(User $user) 
+    {
         $friends = $this->getFriends();
         if ( $user==$this ) {
             return $this->posts;
