@@ -39,8 +39,4 @@ class FriendshipTest extends TestCase
         // Assert
         $this->assertSame("accepted", $statusOfFriendshipWithJohn);
     }
-
-
-
-    
 }

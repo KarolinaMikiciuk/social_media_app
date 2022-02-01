@@ -1,5 +1,27 @@
 
-// Scenario 10
+// Scenario 10.1
+Given there is a user with username Jane
+When Jane creates a post
+Then the post is stored in an array
+
+
+// Scenario 10.2
+Given user with username Jane exists
+Given Jane has created a post saying "Hello from Jane"
+When Jane requests to see her own posts
+Then "Hello from Jane" is returned 
+
+
+// Scenario 11
+Given user with username Jane exists
+Given user with username John exists
+Given that John sends Jane a friendship request
+Given that Jane accepts the friendship request
+When I check whether their friendship is accepted
+Then true is returned 
+
+
+// Scenario 12
 Given user with username John exists
 Given user with username Jane exists
 Given Jane has blocked John
@@ -8,24 +30,4 @@ Then text "You have already blocked this user"
 is displayed
 
 
-// Scenario 11
-Given there is a user with username Jane
-When Jane creates a post
-Then the post is stored in an array
-
-
-// Scenario 12
-Given user with username Jane exists
-Given Jane has created a post saying "Hello from Jane"
-When Jane requests to see her own posts
-Then "Hello from Jane" is returned 
-
-
-// Scenario 13
-Given user with username Jane exists
-Given user with username John exists
-Given that John sends Jane a friendship request
-Given that Jane accepts the friendship request
-When I check whether their friendship is accepted
-Then true is returned 
 

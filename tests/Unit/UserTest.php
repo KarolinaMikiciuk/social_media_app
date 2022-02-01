@@ -213,7 +213,7 @@ class UserTest extends TestCase {
         $this->assertSame($jane->posts, ["Hello from Jane"] );
      }
     
-    // Scenario 12
+    // Scenario 10.2
     public function test_can_return_own_posts() {
 
         // Setup
@@ -227,7 +227,7 @@ class UserTest extends TestCase {
         $this->assertSame($viewedPosts, ["Hello from Jane"] );
     }
     
-     // Scenario 13
+     // Scenario 10.3
     public function test_can_view_only_the_posts_made_by_the_friends_of_the_user() {
 
         // Setup
