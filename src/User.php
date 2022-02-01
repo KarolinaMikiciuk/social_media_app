@@ -99,24 +99,4 @@ class User
             echo "You have already blocked this user";
         }
     }
-
-    // public function createPost(string $text) 
-    // {
-    //     $this->posts[] = $text;
-    // }
-
-    // public function requestToViewPosts(User $user) 
-    // {
-    //     $friends = $this->getFriends();
-    //     if ( $user==$this ) {
-    //         return $this->posts;
-
-    //     } elseif (! in_array($user, $friends, true) ) {
-    //         return [];
-
-    //     } else {
-    //         return $user->posts;
-    //     }
-    // }
-
 }
