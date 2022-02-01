@@ -1,15 +1,6 @@
 #   Scenarios 13 - onwards
 
 // Scenario 13
--- Removing posts
-Given a user with a username Jane exists
-Given Jane has created a post saying "Hello from Jane"
-Given Jane has created a post saying "I am hungry"
-When Jane removes the post saying "Hello from Jane"
-Then Jane has one post
-And that post says "I am hungry"
-
-// Scenario 14
 -- Liking posts
 Given a user with a username Jane exists
 Given a user with a username John exists
@@ -17,6 +8,16 @@ Given Jane has created a post saying "Hello from Jane"
 Given Jane has created a post saying "I am hungry"
 When John likes Jane's post 
 Then the post's likes get incremented by one
+
+
+// Scenario 14
+-- Removing posts
+Given a user with a username Jane exists
+Given Jane has created a post saying "Hello from Jane"
+Given Jane has created a post saying "I am hungry"
+When Jane removes the post saying "Hello from Jane"
+Then Jane has one post
+And that post says "I am hungry"
 
 
 // Scenario 15

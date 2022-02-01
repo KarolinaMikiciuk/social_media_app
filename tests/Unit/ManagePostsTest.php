@@ -69,25 +69,7 @@ class ManagePostsTest extends TestCase {
         $this->assertSame($postsRequestedFromRick, []);
     }
 
-     // Scenario 13
-    public function test_user_can_remove_their_post() 
-    {
-        // Setup
-        $jane = new user("Jane");
-        $postsManager = new ManagePosts();
-        $postsManager->createPost($jane, "Hello from Jane");
-        $postsManager->createPost($jane, "I am hungry");
-
-        // Act
-        $postsManager->removePost($jane, "I am hungry");
-
-        // Assert
-        $janesPosts = $postsManager->requestToViewPosts($jane, $jane);
-
-        $this->assertCount(1, $janesPosts);
-        $this->assertSame($janesPosts, ["I am hungry"]);
-    }
-
+    
 
 
 }
