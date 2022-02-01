@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 use Karolina\App\User;
 use Karolina\App\Friendship;
 use Karolina\App\InvalidFriendRequest;
+use Karolina\App\ManagePosts;
+
 
 
 class UserTest extends TestCase {
@@ -206,9 +208,10 @@ class UserTest extends TestCase {
 
         // Setup
         $jane = new User("Jane");
+        $postsManager = new ManagePosts();
 
         // Act
-        $jane->createPost("Hello from Jane");
+        $postsManager->createPost($jane, "Hello from Jane");
 
         // Assert
         $this->assertSame($jane->posts, ["Hello from Jane"] );
@@ -220,10 +223,11 @@ class UserTest extends TestCase {
 
         // Setup
         $jane = new User("Jane");
-        $jane->createPost("Hello from Jane");
+        $postsManager = new ManagePosts();
+        $postsManager->createPost($jane, "Hello from Jane");
 
         // Act
-        $viewedPosts = $jane->requestToViewPosts($jane);
+        $viewedPosts = $postsManager->requestToViewPosts($jane, $jane);
 
         // Assert
         $this->assertSame($viewedPosts, ["Hello from Jane"] );
@@ -239,12 +243,15 @@ class UserTest extends TestCase {
         $rick = new User("Rick");
         $john->addFriend($jane);
         $jane->acceptFriendshipRequest($john);
-        $jane->createPost("Hello from Jane");
-        $rick->createPost("Hello from Rick");
+
+        $postsManager = new ManagePosts();
+
+        $postsManager->createPost($rick, "Hello from Rick");
+        $postsManager->createPost($jane, "Hello from Jane");
 
         // Act
-        $postsRequestedFromJane = $john->requestToViewPosts($jane);
-        $postsRequestedFromRick = $john->requestToViewPosts($rick);
+        $postsRequestedFromJane = $postsManager->requestToViewPosts($john, $jane);
+        $postsRequestedFromRick = $postsManager->requestToViewPosts($john, $rick);
 
         // Assert
         $this->assertSame($postsRequestedFromJane, ["Hello from Jane"]);
