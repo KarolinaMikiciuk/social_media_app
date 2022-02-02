@@ -13,6 +13,7 @@ class Post {
     {
         $this->author = $author;
         $this->text = $text;
+        $this->likes = 0;
     }
 
 }
