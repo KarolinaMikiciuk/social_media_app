@@ -85,11 +85,9 @@ class ManagePostsTest extends TestCase {
         $jane->acceptFriendshipRequest($john);
 
         // Act
-        $postManager->likePost($john, $post2);
+        $postsManager->likePost($john, $post2);
 
         // Assert
-        
-
-
+        $this->assertCount(1, $post2->likes);
     }
 }
