@@ -68,8 +68,28 @@ class ManagePostsTest extends TestCase {
         $this->assertSame($postsRequestedFromJane, ["Hello from Jane"]);
         $this->assertSame($postsRequestedFromRick, []);
     }
+     
+     // Scenario 13
+    public function test_can_like_a_post_of_a_friend()
+    {
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
 
-    
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+        $post2 = $postsManager->createPost($jane, "I am hungry");
+
+        $john->addFriend($jane);
+        $jane->acceptFriendshipRequest($john);
+
+        // Act
+        $postManager->likePost($john, $post2);
+
+        // Assert
+        
 
 
+    }
 }

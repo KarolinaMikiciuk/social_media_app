@@ -6,11 +6,24 @@ Given a user with a username Jane exists
 Given a user with a username John exists
 Given Jane has created a post saying "Hello from Jane"
 Given Jane has created a post saying "I am hungry"
-When John likes Jane's post 
+Given that Jane and John are friends
+When John likes Jane's post saying "I am hungry"
 Then the post's likes get incremented by one
 
 
 // Scenario 14
+-- Appending liked posts to a user
+Given a user with a username Jane exists
+Given a user with a username John exists
+Given Jane has created a post saying "Hello from Jane"
+Given Jane has created a post saying "I am hungry"
+Given that Jane and John are friends
+Given John likes Jane's post saying "I am hungry"
+When John accesses his list of liked posts
+Then an array with the post "I am hungry" by Jane is returned
+
+
+// Scenario 15
 -- Removing posts
 Given a user with a username Jane exists
 Given Jane has created a post saying "Hello from Jane"
@@ -20,7 +33,7 @@ Then Jane has one post
 And that post says "I am hungry"
 
 
-// Scenario 15
+// Scenario 16
 -- Updating posts
 Given a user with a username Jane exists
 Given Jane has created a post saying "Hello from Jane"
