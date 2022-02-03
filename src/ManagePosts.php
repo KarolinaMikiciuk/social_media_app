@@ -8,7 +8,9 @@ class ManagePosts {
     
     public function createPost(User $user, string $text) 
     {
-        $user->posts[] = $text;
+        $post = new Post($user, $text);
+        $user->posts[] = $post;
+        return $post;
     }
 
     public function requestToViewPosts(User $requester, User $user) 

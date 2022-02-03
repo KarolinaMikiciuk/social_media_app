@@ -7,6 +7,8 @@ use Karolina\App\User;
 use Karolina\App\Friendship;
 use Karolina\App\InvalidFriendRequest;
 use Karolina\App\ManagePosts;
+use Karolina\App\Post;
+
 
 
 class ManagePostsTest extends TestCase {
@@ -22,15 +24,18 @@ class ManagePostsTest extends TestCase {
         $postsManager = new ManagePosts();
 
         // Act
-        $postsManager->createPost($jane, "Hello from Jane");
+        $janesPost = $postsManager->createPost($jane, "Hello from Jane");
 
         // Assert
-        $this->assertSame($jane->posts, ["Hello from Jane"] );
+        $this->assertCount(1, $jane->posts); 
+        //$janesPost = new Post($jane, "Hello from Jane"); <-- legacy
+        $this->assertSame($jane->posts, [$janesPost]); 
      }
-    
+
     // Scenario 10.2
     public function test_can_return_own_posts() 
     {
+        $this->markTestIncomplete("Rework test 1");
 
         // Setup
         $jane = new User("Jane");
@@ -47,6 +52,7 @@ class ManagePostsTest extends TestCase {
      // Scenario 10.3
     public function test_can_view_only_the_posts_made_by_the_friends_of_the_user() 
     {
+        $this->markTestIncomplete("Rework test 1");
 
         // Setup
         $john = new User("John");
@@ -72,6 +78,7 @@ class ManagePostsTest extends TestCase {
      // Scenario 13
     public function test_can_like_a_post_of_a_friend()
     {
+        $this->markTestIncomplete("We need to add the like post feature");
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
