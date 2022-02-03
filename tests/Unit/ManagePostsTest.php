@@ -49,8 +49,6 @@ class ManagePostsTest extends TestCase {
      // Scenario 10.3
     public function test_can_view_only_the_posts_made_by_the_friends_of_the_user() 
     {
-        $this->markTestIncomplete("Rework test 1");
-
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
@@ -61,21 +59,20 @@ class ManagePostsTest extends TestCase {
         $postsManager = new ManagePosts();
 
         $postsManager->createPost($rick, "Hello from Rick");
-        $postsManager->createPost($jane, "Hello from Jane");
+        $janesPost = $postsManager->createPost($jane, "Hello from Jane");
 
         // Act
         $postsRequestedFromJane = $postsManager->requestToViewPosts($john, $jane);
         $postsRequestedFromRick = $postsManager->requestToViewPosts($john, $rick);
 
         // Assert
-        $this->assertSame($postsRequestedFromJane, ["Hello from Jane"]);
+        $this->assertSame($postsRequestedFromJane, [$janesPost]);
         $this->assertSame($postsRequestedFromRick, []);
     }
      
      // Scenario 13
     public function test_can_like_a_post_of_a_friend()
     {
-        $this->markTestIncomplete("We need to add the like post feature");
         // Setup
         $john = new User("John");
         $jane = new User("Jane");
@@ -92,6 +89,6 @@ class ManagePostsTest extends TestCase {
         $postsManager->likePost($john, $post2);
 
         // Assert
-        $this->assertCount(1, $post2->likes);
+        $this->assertSame(1, $post2->likes);
     }
 }
