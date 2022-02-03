@@ -18,7 +18,6 @@ class ManagePostsTest extends TestCase {
      // Scenario 10.1
      public function test_posts_are_stored_in_an_array()
      {
-
         // Setup
         $jane = new User("Jane");
         $postsManager = new ManagePosts();
@@ -35,18 +34,16 @@ class ManagePostsTest extends TestCase {
     // Scenario 10.2
     public function test_can_return_own_posts() 
     {
-        $this->markTestIncomplete("Rework test 1");
-
         // Setup
         $jane = new User("Jane");
         $postsManager = new ManagePosts();
-        $postsManager->createPost($jane, "Hello from Jane");
+        $createdPost = $postsManager->createPost($jane, "Hello from Jane");
 
         // Act
         $viewedPosts = $postsManager->requestToViewPosts($jane, $jane);
 
         // Assert
-        $this->assertSame($viewedPosts, ["Hello from Jane"] );
+        $this->assertSame($viewedPosts, [$createdPost] );
     }
     
      // Scenario 10.3
