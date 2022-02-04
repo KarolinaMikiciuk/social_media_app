@@ -140,6 +140,24 @@ class ManagePostsTest extends TestCase {
      // Scenario 16
     public function test_cannot_like_the_same_post_twice()
     {
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+        $post2 = $postsManager->createPost($jane, "I am hungry");
+
+        $john->addFriend($jane);
+        $jane->acceptFriendshipRequest($john);
+
+        $postsManager->likePost($john, $post2);
+
+        // Act
+        $postsManager->likePost($john, $post2);
         
+        // Assert
+        $this->assertSame(0, $post2->likes);
     }
 }

@@ -33,12 +33,18 @@ class ManagePosts {
     public function likePost(User $personLikingPost, $post) // like posts only of your friends
     {
         $friendsOfUser = $personLikingPost->getFriends();
-        if ( in_array($post->author, $friendsOfUser, true) ) {
-            $post->likes ++;
-            $personLikingPost->likedPosts[] = $post;
+
+        if ( in_array($post, $personLikingPost->likedPosts, true) ) {
+            $post->likes -= 1;
         } else {
-            throw new InvalidPostLiking("You cannot like a post of a user who is not your friend");
+            
+            if ( in_array($post->author, $friendsOfUser, true) ) {
+                $post->likes ++;
+                $personLikingPost->likedPosts[] = $post;
+            } else {
+                throw new InvalidPostLiking("You cannot like a post of a user who is not your friend");
         }
+      }
     }
 
 }
