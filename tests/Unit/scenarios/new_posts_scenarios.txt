@@ -34,7 +34,7 @@ Then an exception InvalidPostLiking is thrown
 
 
 // Scenario 16
--- Show a message cannot like the same post twice
+--If you like an already-liked post then nothing happens
 Given a user with a username Jane exists
 Given a user with a username John exists
 Given Jane has created a post saying "Hello from Jane"
@@ -42,7 +42,8 @@ Given Jane has created a post saying "I am hungry"
 Given that Jane and John are friends
 Given John likes Jane's post saying "I am hungry"
 When John likes Jane's post saying "I am hungry"
-Then nothing happends and the amount of likes is still 1
+Then the amount of likes is 0 
+--> this is the same as Instagram's and Reddit's approach
 
 
 // Scenario 17

@@ -135,6 +135,11 @@ class ManagePostsTest extends TestCase {
 
         // Act 
         $postsManager->likePost($john, $post2);
+    }
 
+     // Scenario 16
+    public function test_cannot_like_the_same_post_twice()
+    {
+        
     }
 }
