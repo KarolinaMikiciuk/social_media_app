@@ -8,6 +8,8 @@ use Karolina\App\Friendship;
 use Karolina\App\InvalidFriendRequest;
 use Karolina\App\ManagePosts;
 use Karolina\App\Post;
+use Karolina\App\InvalidPostLiking;
+
 
 
 
@@ -114,5 +116,25 @@ class ManagePostsTest extends TestCase {
 
         // Assert
         $this->assertSame($johnsLikedPosts, [$post2]);
+    }
+
+     // Scenario 15
+    public function test_throws_an_exception_when_you_like_a_post_of_a_non_friend()
+    {
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+        $post2 = $postsManager->createPost($jane, "I am hungry");
+
+        // Assert- Expect
+        $this->expectException(InvalidPostLiking::class);
+
+        // Act 
+        $postsManager->likePost($john, $post2);
+
     }
 }
