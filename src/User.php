@@ -9,6 +9,7 @@ class User
     public array $friendshipsList = [];
     public array $blockedUsersList = [];
     public array $posts = [];
+    public array $likedPosts = [];
 
     public function __construct($username) 
     {

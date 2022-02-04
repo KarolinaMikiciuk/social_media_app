@@ -91,4 +91,28 @@ class ManagePostsTest extends TestCase {
         // Assert
         $this->assertSame(1, $post2->likes);
     }
+
+     // Scenario 14
+    public function test_a_liked_post_gets_appended_to_the_liked_posts_list_of_a_user()
+    {
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+        $post2 = $postsManager->createPost($jane, "I am hungry");
+
+        $john->addFriend($jane);
+        $jane->acceptFriendshipRequest($john);
+
+        $postsManager->likePost($john, $post2);
+
+        // Act
+        $johnsLikedPosts = $john->likedPosts;
+
+        // Assert
+        $this->assertSame($johnsLikedPosts, [$post2]);
+    }
 }
