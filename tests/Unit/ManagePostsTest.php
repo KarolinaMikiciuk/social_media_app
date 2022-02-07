@@ -162,6 +162,30 @@ class ManagePostsTest extends TestCase {
         $this->assertSame(0, $post2->likes);
     }
 
+     // Scenario 16.1
+    public function test_posts_liked_twice_are_removed_from_liked_posts_of_the_user()
+    {
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+        $post2 = $postsManager->createPost($jane, "I am hungry");
+
+        $john->addFriend($jane);
+        $jane->acceptFriendshipRequest($john);
+
+        $postsManager->likePost($john, $post2);
+
+        // Act
+        $postsManager->likePost($john, $post2);
+        
+        // Assert
+        $this->assertSame($john->likedPosts, []); // test posts liked twice are removed from likedPosts
+    }
+
      // Scenario 17
     public function test_can_remove_a_post_made_by_oneself() 
     {
