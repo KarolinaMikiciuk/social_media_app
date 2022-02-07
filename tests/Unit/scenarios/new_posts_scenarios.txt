@@ -66,5 +66,41 @@ When Jane updates her "Hello from Jane" post
 When Jane views her own posts
 Then ["Hello from Janex","I am hungry"] is returned
 
+// Scenario 19
+-- Disliking posts
+Given a user with a username Jane exists
+Given a user with a username John exists
+Given Jane has created a post saying "Hello from Jane"
+Given Jane has created a post saying "I am hungry"
+Given that Jane and John are friends
+When John dislikes Jane's post saying "I am hungry"
+Then the post's dislikes get incremented by one
+
+
+// Scenario 20.1
+-- Cannot like and dislike post simultaneously
+Given a user with a username Jane exists
+Given a user with a username John exists
+Given Jane has created a post saying "Hello from Jane"
+Given Jane has created a post saying "I am hungry"
+Given that Jane and John are friends
+Given John likes Jane's post saying "I am hungry"
+When John dislikes Jane's post saying "I am hungry"
+Then the post's dislikes get incremented by one
+and the post's likes get decremented by one
+
+
+// Scenario 20.2
+-- Cannot like and dislike post simultaneously
+Given a user with a username Jane exists
+Given a user with a username John exists
+Given Jane has created a post saying "Hello from Jane"
+Given Jane has created a post saying "I am hungry"
+Given that Jane and John are friends
+Given John dislikes Jane's post saying "I am hungry"
+When John likes Jane's post saying "I am hungry"
+Then the post's likes get incremented by one
+and the post's dislikes get decremented by one
+
 
 
