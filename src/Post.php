@@ -22,5 +22,13 @@ class Post {
             return $this;
         }
     }
-
+    
+    public function getRemainingPosts(User $personRemovingPost)
+    {
+        $remainingPosts = array_filter(
+                    $personRemovingPost->posts,
+                    fn(Post $genericPost) => $genericPost->isNotSpecifiedPost($this)
+                );
+        return $remainingPosts;
+    }
 }
