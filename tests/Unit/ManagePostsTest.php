@@ -8,8 +8,10 @@ use Karolina\App\Friendship;
 use Karolina\App\InvalidFriendRequest;
 use Karolina\App\ManagePosts;
 use Karolina\App\Post;
-use Karolina\App\InvalidPostLiking;
+use Karolina\App\InvalidPostReaction;
 use Karolina\App\InvalidPostChange;
+use Karolina\App\ReactionArray;
+
 
 
 
@@ -132,7 +134,7 @@ class ManagePostsTest extends TestCase {
         $post2 = $postsManager->createPost($jane, "I am hungry");
 
         // Assert- Expect
-        $this->expectException(InvalidPostLiking::class);
+        $this->expectException(InvalidPostReaction::class);
 
         // Act 
         $postsManager->likePost($john, $post2);

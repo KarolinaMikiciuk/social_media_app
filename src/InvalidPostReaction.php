@@ -3,6 +3,6 @@
 namespace Karolina\App;
 use Exception;
 
-class InvalidPostLiking extends Exception
+class InvalidPostReaction extends Exception
 {
 }

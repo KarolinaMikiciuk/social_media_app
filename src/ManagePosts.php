@@ -27,44 +27,16 @@ class ManagePosts {
         }
     }
     
-    /**
-     * @throws InvalidPostLiking
-     */
     public function likePost(User $personLikingPost, Post $post) // like posts only of your friends
     {
-        $friendsOfUser = $personLikingPost->getFriends();
-
-        if ( in_array($post, $personLikingPost->likedPosts, true) ) {
-            $post->likes -= 1;
-        } else {
-            
-            if ( in_array($post->author, $friendsOfUser, true) ) {
-                $post->likes ++;
-                $personLikingPost->likedPosts[] = $post;
-            } else {
-                throw new InvalidPostLiking("You cannot like a post of a user who is not your friend");
-        }
-      }
+        $likedPostsArray = new ReactionArray(false, $personReactingToPost->likedPosts);
+        $likedPostsArray->reactToPost($personReactingToPost, $post);
     }
     
-    /**
-     * @throws InvalidPostLiking
-     */
-    public function dislikePost(User $personDislikingPost, Post $post) // dislike posts only of your friends
+    public function dislikePost(User $personReactingToPost, Post $post) // dislike posts only of your friends
     {
-        $friendsOfUser = $personDislikingPost->getFriends();
-
-        if ( in_array($post, $personDislikingPost->dislikedPosts, true) ) {
-            $post->dislikes -= 1;
-        } else {
-            
-            if ( in_array($post->author, $friendsOfUser, true) ) {
-                $post->dislikes ++;
-                $personDislikingPost->dislikedPosts[] = $post;
-            } else { //likes and disliked come under the same exception
-                throw new InvalidPostLiking("You cannot dislike a post of a user who is not your friend");
-        }
-      }
+        $dislikedPostsArray = new ReactionArray(false, $personReactingToPost->dislikedPosts);
+        $dislikedPostsArray->reactToPost($personReactingToPost, $post);
     }
 
     /**
