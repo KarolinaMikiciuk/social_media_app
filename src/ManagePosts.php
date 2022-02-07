@@ -30,7 +30,7 @@ class ManagePosts {
     /**
      * @throws InvalidPostLiking
      */
-    public function likePost(User $personLikingPost, $post) // like posts only of your friends
+    public function likePost(User $personLikingPost, Post $post) // like posts only of your friends
     {
         $friendsOfUser = $personLikingPost->getFriends();
 
@@ -47,7 +47,10 @@ class ManagePosts {
       }
     }
 
-    public function removePost(User $personRemovingPost, $post)
+    /**
+     * @throws InvalidPostRemoval
+     */
+    public function removePost(User $personRemovingPost, Post $post)
     {
         if ($post->author === $personRemovingPost ) {
             
@@ -55,7 +58,19 @@ class ManagePosts {
             $personRemovingPost->posts = array_values($remainingPosts);
 
         } else {
-            throw new InvalidPostRemoval("You cannot remove posts of other users");
+            throw new InvalidPostChange("You cannot remove posts of other users");
+        }
+    }
+
+    public function updatePost(User $personUpdatingPost, Post $post, string $newText)
+    {
+        if ($post->author === $personUpdatingPost ) {
+
+            $index = array_search($post, $personUpdatingPost->posts);
+            $personUpdatingPost->posts[$index]->text = $newText;
+
+        } else {
+            throw new InvalidPostChange("You cannot update posts of other users");
         }
     }
 

@@ -9,6 +9,7 @@ use Karolina\App\InvalidFriendRequest;
 use Karolina\App\ManagePosts;
 use Karolina\App\Post;
 use Karolina\App\InvalidPostLiking;
+use Karolina\App\InvalidPostChange;
 
 
 
@@ -195,6 +196,9 @@ class ManagePostsTest extends TestCase {
 
         // Assert
         $janesPosts = $postsManager->requestToViewPosts($jane, $jane);
-        $this->assertSame($janesPosts, ["Hello from Janex","I am hungry"]);
+        $janesPostsText = [$janesPosts[0]->text, $janesPosts[1]->text];
+        $this->assertSame($janesPostsText, ["Hello from Janex","I am hungry"]);
     }
+
+
 }
