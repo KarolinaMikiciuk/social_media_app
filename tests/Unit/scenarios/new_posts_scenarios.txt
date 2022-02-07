@@ -66,6 +66,7 @@ When Jane updates her "Hello from Jane" post
 When Jane views her own posts
 Then ["Hello from Janex","I am hungry"] is returned
 
+
 // Scenario 19
 -- Disliking posts
 Given a user with a username Jane exists

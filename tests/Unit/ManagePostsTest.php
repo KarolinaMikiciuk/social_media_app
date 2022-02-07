@@ -200,5 +200,27 @@ class ManagePostsTest extends TestCase {
         $this->assertSame($janesPostsText, ["Hello from Janex","I am hungry"]);
     }
 
+     // Scenario 19
+    public function test_can_dislike_a_post()
+    {
+        // Setup
+        $john = new User("John");
+        $jane = new User("Jane");
+
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+        $post2 = $postsManager->createPost($jane, "I am hungry");
+
+        $john->addFriend($jane);
+        $jane->acceptFriendshipRequest($john);
+
+        // Act
+        $postsManager->dislikePost($john, $post2);
+
+        // Assert
+        $this->assertSame(1, $post2->dislikes);
+    }
+
 
 }
