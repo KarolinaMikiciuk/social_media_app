@@ -10,6 +10,7 @@ class User
     public array $blockedUsersList = [];
     public array $posts = [];
     public array $likedPosts = [];
+    public array $dislikedPosts = [];
 
     public function __construct($username) 
     {

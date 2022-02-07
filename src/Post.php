@@ -8,12 +8,14 @@ class Post {
     public User $author;
     public string $text;
     public int $likes;
+    public int $dislikes;
     
     public function __construct(User $author, string $text)
     {
         $this->author = $author;
         $this->text = $text;
         $this->likes = 0;
+        $this->dislikes = 0;
     }
 
     public function isNotSpecifiedPost(Post $post)
