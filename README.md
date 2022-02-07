@@ -3,7 +3,7 @@
 * This is a simple backend code for a social media app.
 * It's implemented using OOP and developed using TDD.
 * It's also my first PHP project. 
-* I think I started learning PHP on either the 21st January. So I guess it's not too bad.
+* Please let me know if you have any feedback for me :)
 
 ## INCLUDED FUNCTIONALITY
 * Adding friends: sending and accepting friendship requests
@@ -13,6 +13,10 @@
 * Liking and disliking the posts of your friends
   * removing likes and dislikes
 
+
+## DESIGN AND FEATURED PATTERNS
+* Collection class pattern
+* COMING SOON!: Fluent interface pattern
 
 ## CLONING THE PROJECT
 * Clone the repository.
