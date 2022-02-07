@@ -14,8 +14,6 @@ use Karolina\App\ReactionArray;
 
 
 
-
-
 class ManagePostsTest extends TestCase {
 
      // Scenario 10

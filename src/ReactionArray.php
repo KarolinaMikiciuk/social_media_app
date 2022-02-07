@@ -17,12 +17,12 @@ class ReactionArray {
 
     public function hasUserReactedToThisPost(Post $post)
     {
-        ($this->isLikesArray) ? in_array($post, $postsArray, true)
-                              : in_array($post, $postsArray, true);
+        ($this->isLikesArray) ? in_array($post, $this->postsArray, true)
+                              : in_array($post, $this->postsArray, true);
     }
     
     public function enforceIdempotency(Post $post)
-    {
+    { // TODO: remove post from liked posts array or disliked posts array
         ($this->isLikesArray) ? $post->likes -= 1
                               : $post->dislikes -= 1;
     }

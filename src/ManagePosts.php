@@ -29,14 +29,14 @@ class ManagePosts {
     
     public function likePost(User $personLikingPost, Post $post) // like posts only of your friends
     {
-        $likedPostsArray = new ReactionArray(false, $personReactingToPost->likedPosts);
-        $likedPostsArray->reactToPost($personReactingToPost, $post);
+        $likedPostsArray = new ReactionArray(true, $personLikingPost->likedPosts);
+        $likedPostsArray->reactToPost($personLikingPost, $post);
     }
     
-    public function dislikePost(User $personReactingToPost, Post $post) // dislike posts only of your friends
+    public function dislikePost(User $personDislikingPost, Post $post) // dislike posts only of your friends
     {
-        $dislikedPostsArray = new ReactionArray(false, $personReactingToPost->dislikedPosts);
-        $dislikedPostsArray->reactToPost($personReactingToPost, $post);
+        $dislikedPostsArray = new ReactionArray(false, $personDislikingPost->dislikedPosts);
+        $dislikedPostsArray->reactToPost($personDislikingPost, $post);
     }
 
     /**
