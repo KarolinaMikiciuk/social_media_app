@@ -9,7 +9,9 @@
 * Adding friends: sending and accepting friendship requests
 * Viewing your friends and friendship requests
 * Removing friends and blocking users
-* Creating, viewing and liking posts of your friends
+* Creating, viewing, updating and removing posts
+* Liking and disliking the posts of your friends
+  * removing likes and dislikes
 
 
 ## CLONING THE PROJECT
