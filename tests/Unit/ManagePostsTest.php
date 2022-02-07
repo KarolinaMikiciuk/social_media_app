@@ -204,6 +204,21 @@ class ManagePostsTest extends TestCase {
         $this->assertSame($jane->posts, [$post2]); // must reset index to pass
     }
 
+     // Scenario 17.1
+    public function test_throws_exception_when_trying_to_remove_someone_elses_post()
+    {
+        // Setup
+        $jane = new User("Jane");
+        $john = new User("John");
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+
+        // Assert- Act
+        $this->expectException(InvalidPostChange::class);
+        $postsManager->removePost($john, $post1); 
+    }
+
      // Scenario 18
     public function test_can_update_post()
     {
