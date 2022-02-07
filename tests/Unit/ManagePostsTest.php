@@ -178,4 +178,23 @@ class ManagePostsTest extends TestCase {
         // Assert
         $this->assertSame($jane->posts, [$post2]); // must reset index to pass
     }
+
+     // Scenario 18
+    public function test_can_update_post()
+    {
+        // Setup
+        $jane = new User("Jane");
+
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+        $post2 = $postsManager->createPost($jane, "I am hungry");
+
+        // Act
+        $postsManager->updatePost($jane, $post1, "Hello from Janex");
+
+        // Assert
+        $janesPosts = $postsManager->requestToViewPosts($jane, $jane);
+        $this->assertSame($janesPosts, ["Hello from Janex","I am hungry"]);
+    }
 }
