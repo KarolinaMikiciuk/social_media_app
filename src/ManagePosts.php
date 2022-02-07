@@ -46,7 +46,7 @@ class ManagePosts {
     {
         if ($post->author === $personRemovingPost ) {
             
-            $remainingPosts = $post->getRemainingPosts($personRemovingPost);
+            $remainingPosts = $post->getRemainingPosts($personRemovingPost, $personRemovingPost->posts);
             $personRemovingPost->posts = array_values($remainingPosts);
 
         } else {

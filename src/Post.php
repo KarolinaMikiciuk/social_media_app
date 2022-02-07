@@ -25,10 +25,10 @@ class Post {
         }
     }
     
-    public function getRemainingPosts(User $personRemovingPost)
+    public function getRemainingPosts(User $personRemovingPost, array $postsArray)
     {
         $remainingPosts = array_filter(
-                    $personRemovingPost->posts,
+                    $postsArray,
                     fn(Post $genericPost) => $genericPost->isNotSpecifiedPost($this)
                 );
         return $remainingPosts;

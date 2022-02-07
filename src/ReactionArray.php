@@ -20,12 +20,17 @@ class ReactionArray {
         return in_array($post, $this->postsArray, true);
     }
     
-    public function enforceIdempotency(Post $post)
-    { // TODO: remove post from liked posts array or disliked posts array
-        //$postsManager = new ManagePosts();
-       // $postsManager->removePostFromLiked($personReactingToPost, $post); 
-        ($this->isLikesArray) ? $post->likes -= 1
-                              : $post->dislikes -= 1;
+    public function enforceIdempotency(User $personReactingToPost, Post $post)
+    { 
+        $remainingPosts = $post->getRemainingPosts($personReactingToPost, $this->postsArray);
+
+        if ($this->isLikesArray) {
+            $post->likes -= 1;
+            $personReactingToPost->likedPosts = array_values($remainingPosts); 
+        } else{
+            $post->dislikes -= 1;
+            $personReactingToPost->dislikedPosts = array_values($remainingPosts); 
+        }
     }
 
     public function appendReaction(User $personReactingToPost, Post $post)
@@ -46,7 +51,7 @@ class ReactionArray {
         $friendsOfUser = $personReactingToPost->getFriends();
 
         if ( $this->hasUserReactedToThisPost($post) ) {
-            $this->enforceIdempotency($post);
+            $this->enforceIdempotency($personReactingToPost, $post);
 
         } else {
             ( in_array($post->author, $friendsOfUser, true) ) 
