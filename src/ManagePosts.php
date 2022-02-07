@@ -47,4 +47,19 @@ class ManagePosts {
       }
     }
 
+    public function removePost(User $personRemovingPost, $post)
+    {
+        if ($post->author === $personRemovingPost ) {
+            
+            $remainingPosts = 
+                array_filter(
+                    $personRemovingPost->posts,
+                    fn(Post $genericPost) => $genericPost->isNotSpecifiedPost($post)
+                );
+            $personRemovingPost->posts = array_values($remainingPosts);
+        } else {
+            throw new InvalidPostRemoval("You cannot remove posts of other users");
+        }
+    }
+
 }

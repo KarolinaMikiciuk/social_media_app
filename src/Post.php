@@ -16,4 +16,11 @@ class Post {
         $this->likes = 0;
     }
 
+    public function isNotSpecifiedPost(Post $post)
+    {
+        if ( $this !== $post) {
+            return $this;
+        }
+    }
+
 }

@@ -160,4 +160,22 @@ class ManagePostsTest extends TestCase {
         // Assert
         $this->assertSame(0, $post2->likes);
     }
+
+     // Scenario 17
+    public function test_can_remove_a_post_made_by_oneself() 
+    {
+        // Setup
+        $jane = new User("Jane");
+
+        $postsManager = new ManagePosts();
+
+        $post1 = $postsManager->createPost($jane, "Hello from Jane");
+        $post2 = $postsManager->createPost($jane, "I am hungry");
+
+        // Act
+        $postsManager->removePost($jane, $post1); 
+
+        // Assert
+        $this->assertSame($jane->posts, [$post2]); // must reset index to pass
+    }
 }
