@@ -16,6 +16,7 @@
 
 ## DESIGN AND FEATURED PATTERNS
 * Collection class pattern
+* IN PROGRESS: Repository Pattern
 * COMING SOON!: Fluent interface pattern
 
 ## CLONING THE PROJECT
